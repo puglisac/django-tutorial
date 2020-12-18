@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
+    # path for polls app. include() tells django to include only the url after 'polls/'
     path('polls/', include('polls.urls')),
+    
     path('admin/', admin.site.urls),
 ]

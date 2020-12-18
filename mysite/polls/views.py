@@ -4,11 +4,15 @@ from django.shortcuts import get_object_or_404, render
 from .models import Question
 
 # Create your views here.
+
+# view.index. polls/
 def index(request):
+    # list of 5 most recent questions
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     context = {
         'latest_question_list': latest_question_list,
     }
+    # renders a template located at polls/templates/polls/index.html
     return render(request, 'polls/index.html', context)
 
 def detail(request, question_id):
