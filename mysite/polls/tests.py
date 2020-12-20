@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.utils import timezone
 from django.urls import reverse
 
-from .models import Question
+from .models import Choice, Question
 
 
 class QuestionModelTests(TestCase):
@@ -43,7 +43,9 @@ def create_question(question_text, days):
     in the past, positive for questions that have yet to be published).
     """
     time = timezone.now() + datetime.timedelta(days=days)
-    return Question.objects.create(question_text=question_text, pub_date=time)
+    new_question = Question.objects.create(question_text=question_text, pub_date=time)
+    Choice.objects.create(choice_text="new choice", question=new_question)
+    return new_question
 
 
 class QuestionIndexViewTests(TestCase):
