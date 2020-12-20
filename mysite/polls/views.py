@@ -2,7 +2,7 @@
 from django.http.response import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-
+from django.views import generic
 from .models import Question, Choice
 
 # Create your views here.
