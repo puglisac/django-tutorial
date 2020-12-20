@@ -64,3 +64,6 @@ $ python manage.py createsuperuser
  ```
 $ python manage.py runserver
 ```
+10. To run tests:
+ ```
+ $ python manage.py test polls
