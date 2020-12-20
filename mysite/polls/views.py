@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.views import generic
 from .models import Question, Choice
 from django.utils import timezone
+from django.db.models import Count
 
 # Create your views here.
 
@@ -15,9 +16,8 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         """Return the last five published questions."""
-        questions = Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
-        question_set = [q for q in questions if q.choice_set.all()]
-        return question_set
+        questions = Question.objects.filter(pub_date__lte=timezone.now(), choice__choice_text__isnull=False).annotate(total=Count('id')).order_by('-pub_date')[:5]
+        return questions
 
 class DetailView(generic.DetailView):
     model = Question
